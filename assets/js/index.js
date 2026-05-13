@@ -1,34 +1,7 @@
-const coins = [
-    { name: 'BTC', price: 67845.32, change: 2.45 },
-    { name: 'ETH', price: 3567.21, change: 1.89 },
-    { name: 'BNB', price: 598.45, change: -0.78 },
-    { name: 'SOL', price: 142.78, change: 5.32 },
-    { name: 'ADA', price: 0.6234, change: -1.23 },
-    { name: 'XRP', price: 0.5234, change: 3.45 },
-    { name: 'DOGE', price: 0.1234, change: 8.90 },
-    { name: 'DOT', price: 7.89, change: -2.34 },
-    { name: 'AVAX', price: 34.56, change: 1.67 },
-    { name: 'MATIC', price: 0.89, change: -0.45 },
-    { name: 'LINK', price: 14.56, change: 4.56 },
-    { name: 'UNI', price: 7.23, change: 2.34 },
-    { name: 'ATOM', price: 9.78, change: -1.89 },
-    { name: 'LTC', price: 78.90, change: 0.67 },
-    { name: 'NEAR', price: 5.67, change: 12.34 }
-];
-const tickerTrack = document.getElementById('tickerTrack');
-coins.forEach((coin, i) => {
-    const changeClass = coin.change >= 0 ? 'positive' : 'negative';
-    const changeSign = coin.change >= 0 ? '+' : '';
-    tickerTrack.innerHTML += `<div class="ticker-item"><span class="ticker-pair">${coin.name}/USDT</span><span class="ticker-price">$${coin.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span><span class="ticker-change ${changeClass}">${changeSign}${coin.change}%</span></div>`;
-});
-tickerTrack.innerHTML += tickerTrack.innerHTML;
 
-// Chart
+const coins = [{ name: 'BTC', price: 67845.32, change: 2.45 }, { name: 'ETH', price: 3567.21, change: 1.89 }, { name: 'BNB', price: 598.45, change: -0.78 }, { name: 'SOL', price: 142.78, change: 5.32 }, { name: 'ADA', price: 0.6234, change: -1.23 }, { name: 'XRP', price: 0.5234, change: 3.45 }, { name: 'DOGE', price: 0.1234, change: 8.90 }, { name: 'DOT', price: 7.89, change: -2.34 }, { name: 'AVAX', price: 34.56, change: 1.67 }, { name: 'MATIC', price: 0.89, change: -0.45 }, { name: 'LINK', price: 14.56, change: 4.56 }, { name: 'UNI', price: 7.23, change: 2.34 }, { name: 'ATOM', price: 9.78, change: -1.89 }, { name: 'LTC', price: 78.90, change: 0.67 }, { name: 'NEAR', price: 5.67, change: 12.34 }];
+const track = document.getElementById('tickerTrack');
+coins.forEach(c => { const cl = c.change >= 0 ? 'positive' : 'negative'; const s = c.change >= 0 ? '+' : ''; track.innerHTML += `<div class="ticker-item"><span class="ticker-pair">${c.name}/USDT</span><span class="ticker-price">$${c.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span><span class="ticker-change ${cl}">${s}${c.change}%</span></div>` });
+track.innerHTML += track.innerHTML;
 const ctx = document.getElementById('mainChart');
-if (ctx) {
-    const data = []; const labels = []; let price = 67000;
-    for (let i = 30; i >= 0; i--) { price += (Math.random() - 0.5) * 500; data.push(price); labels.push(`${i}d ago`) }
-    const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 350);
-    gradient.addColorStop(0, 'rgba(99,102,241,0.3)'); gradient.addColorStop(1, 'rgba(99,102,241,0)');
-    new Chart(ctx, { type: 'line', data: { labels, datasets: [{ label: 'BTC/USDT', data, borderColor: '#818cf8', backgroundColor: gradient, borderWidth: 2, tension: 0.4, fill: true, pointRadius: 0, pointHoverRadius: 6, pointHoverBackgroundColor: '#818cf8', pointHoverBorderColor: '#fff', pointHoverBorderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, interaction: { intersect: false, mode: 'index' }, plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15,20,45,0.95)', titleColor: '#94a3b8', bodyColor: '#f1f5f9', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, padding: 12, displayColors: false, callbacks: { label: function (ctx) { return '$' + ctx.parsed.y.toFixed(2) } } } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 8 } }, y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#94a3b8', font: { size: 10 }, callback: function (v) { return '$' + v.toLocaleString() } } } } } })
-}
+if (ctx) { const data = []; const labels = []; let price = 67000; for (let i = 30; i >= 0; i--) { price += (Math.random() - 0.5) * 500; data.push(price); labels.push(`${i}d ago`) } const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 350); gradient.addColorStop(0, 'rgba(99,102,241,0.3)'); gradient.addColorStop(1, 'rgba(99,102,241,0)'); new Chart(ctx, { type: 'line', data: { labels, datasets: [{ label: 'BTC/USDT', data, borderColor: '#818cf8', backgroundColor: gradient, borderWidth: 2, tension: 0.4, fill: true, pointRadius: 0, pointHoverRadius: 6, pointHoverBackgroundColor: '#818cf8', pointHoverBorderColor: '#fff', pointHoverBorderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, interaction: { intersect: false, mode: 'index' }, plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15,20,45,0.95)', titleColor: '#94a3b8', bodyColor: '#f1f5f9', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, padding: 12, displayColors: false, callbacks: { label: function (ctx) { return '$' + ctx.parsed.y.toFixed(2) } } } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#94a3b8', font: { size: 10 }, maxTicksLimit: 8 } }, y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#94a3b8', font: { size: 10 }, callback: function (v) { return '$' + v.toLocaleString() } } } } } }) }
