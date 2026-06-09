@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cryptocurrency-exchange-dashboard",
+  "compatibility_date": "2026-06-09",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "pages"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
